@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Grammar Guard Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        textarea, [contenteditable] {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        [contenteditable] {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>DIY Grammar Guard Extension Test</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Make sure the DIY Grammar Guard Chrome extension is loaded</li>
+            <li>Type some text with grammar/spelling mistakes in the fields below</li>
+            <li>Wait 2 seconds after stopping typing</li>
+            <li>The extension should show floating tooltips with suggestions</li>
+            <li>Test both Accept and Dismiss buttons</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Textarea Test</h2>
+        <p>Type some text with mistakes here:</p>
+        <textarea placeholder="Type some text with grammar or spelling mistakes... For example: 'I goes to the store yesterday and buyed some apples.'"></textarea>
+    </div>
+
+    <div class="test-section">
+        <h2>Content Editable Test</h2>
+        <p>Type some text with mistakes here:</p>
+        <div contenteditable="true" placeholder="Type some text with grammar or spelling mistakes... For example: 'She dont like to eat vegetables and her brother neither.'"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Longer Text Test</h2>
+        <p>Type a longer paragraph with multiple mistakes:</p>
+        <textarea placeholder="Write a longer paragraph with multiple grammar and spelling mistakes to test the full rewrite feature..."></textarea>
+    </div>
+
+    <script>
+        // Add placeholder text functionality for contenteditable
+        document.querySelectorAll('[contenteditable]').forEach(element => {
+            const placeholder = element.getAttribute('placeholder');
+            if (placeholder) {
+                element.addEventListener('focus', function() {
+                    if (this.textContent === placeholder) {
+                        this.textContent = '';
+                    }
+                });
+                element.addEventListener('blur', function() {
+                    if (this.textContent.trim() === '') {
+                        this.textContent = placeholder;
+                    }
+                });
+                // Set initial placeholder
+                if (element.textContent.trim() === '') {
+                    element.textContent = placeholder;
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
